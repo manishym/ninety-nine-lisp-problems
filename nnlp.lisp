@@ -15,3 +15,11 @@
   (if (null (rest lst))
       lst
       (mylast (rest lst))))
+
+(defun p02 (lst)
+  (my-butlast lst))
+(defun my-butlast (lst)
+  (when (consp (rest lst))
+    (if (null (rest (rest lst)))
+        lst
+        (my-butlast (rest lst)))))
