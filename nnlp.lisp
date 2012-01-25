@@ -42,3 +42,24 @@
       len
       (my-length (rest lst) (1+ len))))
 
+(defun p05 (lst)
+  (my-reverse lst))
+
+(defun my-reverse (lst)
+  (labels (
+           (rev (acc lst)
+             (if (null lst)
+                 acc
+                 (rev (push (first lst) acc) (rest lst)))))
+    (rev '() lst )))
+(defun p06 (lst)
+  (my-palindrome lst))
+
+(defun my-palindrome (lst)
+  (cond ((null lst) t)
+        ((my-single? lst) t)
+        ((eql (first lst) (car (last lst))) (my-palindrome (rest (butlast lst))))
+        (t nil)))
+
+(defun my-single? (lst)
+  (and (consp lst) (null (cdr lst))))
