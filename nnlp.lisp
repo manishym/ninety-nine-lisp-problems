@@ -10,7 +10,7 @@
 ;; (D)
 
 (defun p01 (lst)
-  (my-last lst))
+  (mylast lst))
 (defun mylast (lst)
   (if (null (rest lst))
       lst
@@ -63,3 +63,26 @@
 
 (defun my-single? (lst)
   (and (consp lst) (null (cdr lst))))
+
+(defun p07 (lst)
+  (flatten lst))
+
+(defun flatten (lst)
+  (labels (
+           (flat (acc lst)
+             (let ((first (first lst)))
+              (cond ((null lst) acc)
+                    ((consp first) (flat (append acc (flat '()  first)) (rest lst)))
+                    (t (flat (append acc (list first)) (rest lst)))))))
+    (flat '() lst)))
+(defun p08 (lst)
+  (compress lst))
+
+(defun compress (lst)
+  (labels
+      ((comp (acc lst)
+         (let ((elt (first lst)))
+           (cond ((null lst) acc)
+                 ((eql elt (second lst)) (comp acc (rest lst)) )
+                 (t (comp (append acc (list elt)) (rest lst)))))))
+    (comp '() lst)))
