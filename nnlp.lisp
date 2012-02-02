@@ -86,3 +86,31 @@
                  ((eql elt (second lst)) (comp acc (rest lst)) )
                  (t (comp (append acc (list elt)) (rest lst)))))))
     (comp '() lst)))
+
+;; P09 (**) Pack consecutive duplicates of list elements into sublists.
+;; If a list contains repeated elements they should be placed in separate sublists.
+
+;; Example:
+;; * (pack '(a a a a b c c a a d e e e e))
+;; ((A A A A) (B) (C C) (A A) (D) (E E E E))
+
+(defun p09 (lst)
+  (pack-duplicates lst))
+
+(defun single? (lst)
+  (and (consp lst) (null (cdr lst))))
+;; (defun pack-duplicates (lst)
+;;   (labels
+;;       ((pack-list (acc lst)
+;;          (cond ((null lst) nil)
+;;                ((eql (first acc) (first lst))
+;;                 (pack-list (append acc (list (first lst))) (rest lst)))
+;;                (t (if (single? acc)
+;;                       (list (car acc) lst)
+;;                       (list acc lst)))))
+;;        (dup (acc lst)
+;;          (if (null lst)
+;;              acc
+;;              (let ((packed  (pack-list (list (first lst)) (rest lst))))
+;;                (dup (append acc (list (first packed))) (rest packed))))))
+;;     (dup nil lst)))
